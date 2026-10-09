@@ -615,12 +615,38 @@
     currentTeamKey = teamKey;
     el("teamSelect").value = teamKey;
     const st = loadState(teamKey) || {};
-    if (!st.inventory) st.inventory = teamDefaultInventory(teamKey);
+    const baseline = teamDefaultInventory(teamKey);
+    const baselineSig = invSignature(baseline);
+
+    if (!st.inventory) {
+      // First time for this team in this browser: seed from the league's picks.
+      st.inventory = baseline;
+      st.invBaseline = baselineSig;
+    } else if (st.invBaseline !== baselineSig) {
+      // The league's recorded picks changed (or this saved state predates the
+      // pick-inventory feature). Re-seed UNLESS the person had customized their
+      // inventory away from the baseline it was originally seeded with.
+      const wasCustomized =
+        st.invBaseline != null && invSignature(st.inventory) !== st.invBaseline;
+      if (!wasCustomized) {
+        st.inventory = baseline;
+      }
+      // Either way, adopt the new baseline so future changes are detected correctly.
+      st.invBaseline = baselineSig;
+    }
+
     if (!st.selected) st.selected = [];
     saveState(teamKey, st);
     renderInventory();
     renderPlayers();
     recompute();
+  }
+
+  // Stable signature of an inventory map, for detecting changes/overrides.
+  function invSignature(inv) {
+    const parts = [];
+    for (let r = 1; r <= rounds(); r++) parts.push(inv[r] != null ? inv[r] : 0);
+    return parts.join(",");
   }
 
   // Default pick inventory for a team: use the real post-trade inventory baked into

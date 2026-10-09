@@ -25,7 +25,12 @@ only data entered by hand, and that lives in the browser (localStorage), not in 
 
       "roster": [
         { "playerId": "5583", "name": "Nikola Jokic" }
-      ]
+      ],
+
+      "pickInventory": {
+        "1": 1, "2": 0, "3": 2, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1,
+        "9": 1, "10": 1, "11": 1, "12": 1, "13": 1, "14": 1, "15": 1
+      }
     }
   ],
 
@@ -54,5 +59,11 @@ only data entered by hand, and that lives in the browser (localStorage), not in 
   A player drafted in round 1 has base cost "round 0", which is not keepable.
 - **Base keeper cost** for an FA = assigned from `faCostStartRound` downward as more
   FAs are kept (handled by the calculator, since it depends on the chosen keeper set).
-- **Pick inventory** per team defaults to one pick in each round `1..rounds`. Trades are
-  applied by the user in the UI and persisted to localStorage, keyed by `teamKey`.
+- **`teams[].pickInventory`** (optional) — the team's actual draft picks for next
+  season after trades, as a `round -> count` map. A team may own 0, 1, or several picks
+  in a round. If present, the page pre-fills each team's inventory from this; otherwise
+  it falls back to one pick per round. Each person can still override their own team's
+  inventory in the UI (saved to their localStorage, keyed by `teamKey`); overrides are
+  highlighted and reset to this recorded inventory.
+- `meta.pickInventorySeason` (optional) — the season the `pickInventory` picks are for
+  (normally `nextSeason`).

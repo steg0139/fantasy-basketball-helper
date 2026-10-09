@@ -8,7 +8,8 @@
     "faCostStartRound": 8,
     "generatedAt": "2026-10-09T01:20:22.775Z",
     "source": "paste-import",
-    "rosterSource": "roster-paste"
+    "rosterSource": "roster-paste",
+    "pickInventorySeason": 2026
   },
   "teams": [
     {
@@ -88,7 +89,24 @@
           "playerId": "n:giannis antetokounmpo",
           "name": "Giannis Antetokounmpo"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 0,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 2,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1
+      }
     },
     {
       "teamKey": "paste.t.2",
@@ -167,7 +185,24 @@
           "playerId": "n:paul george",
           "name": "Paul George"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 2,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 0,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1
+      }
     },
     {
       "teamKey": "paste.t.3",
@@ -246,7 +281,24 @@
           "playerId": "n:fred vanvleet",
           "name": "Fred VanVleet"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 2,
+        "2": 0,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 2,
+        "9": 1,
+        "10": 0,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1
+      }
     },
     {
       "teamKey": "paste.t.4",
@@ -321,7 +373,24 @@
           "playerId": "n:trae young",
           "name": "Trae Young"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 2,
+        "13": 2,
+        "14": 2,
+        "15": 2
+      }
     },
     {
       "teamKey": "paste.t.5",
@@ -396,7 +465,24 @@
           "playerId": "n:bennedict mathurin",
           "name": "Bennedict Mathurin"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1
+      }
     },
     {
       "teamKey": "paste.t.6",
@@ -475,7 +561,24 @@
           "playerId": "n:ja morant",
           "name": "Ja Morant"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "7": 0,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 2,
+        "14": 1,
+        "15": 0
+      }
     },
     {
       "teamKey": "paste.t.7",
@@ -546,7 +649,24 @@
           "playerId": "n:trey murphy iii",
           "name": "Trey Murphy III"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 2,
+        "2": 2,
+        "3": 2,
+        "4": 2,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 0,
+        "13": 0,
+        "14": 0,
+        "15": 0
+      }
     },
     {
       "teamKey": "paste.t.8",
@@ -621,7 +741,24 @@
           "playerId": "n:tyrese maxey",
           "name": "Tyrese Maxey"
         }
-      ]
+      ],
+      "pickInventory": {
+        "1": 0,
+        "2": 2,
+        "3": 1,
+        "4": 1,
+        "5": 0,
+        "6": 1,
+        "7": 2,
+        "8": 0,
+        "9": 1,
+        "10": 2,
+        "11": 1,
+        "12": 1,
+        "13": 0,
+        "14": 1,
+        "15": 2
+      }
     }
   ],
   "draft": {

@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "leagueKey": "428.l.000000",
+    "leagueName": "Sample Hoops League",
+    "season": 2025,
+    "nextSeason": 2026,
+    "rounds": 15,
+    "faCostStartRound": 8,
+    "generatedAt": "2026-10-08T00:00:00Z"
+  },
+  "teams": [
+    {
+      "teamKey": "428.l.000000.t.1",
+      "teamId": "1",
+      "name": "Dunk Dynasty",
+      "roster": [
+        { "playerId": "100", "name": "Shai Gilgeous-Alexander" },
+        { "playerId": "101", "name": "Jalen Williams" },
+        { "playerId": "102", "name": "Alperen Sengun" },
+        { "playerId": "103", "name": "Derrick White" },
+        { "playerId": "104", "name": "Payton Pritchard" },
+        { "playerId": "900", "name": "Quentin Grimes (FA pickup)" },
+        { "playerId": "901", "name": "Ryan Rollins (FA pickup)" }
+      ]
+    },
+    {
+      "teamKey": "428.l.000000.t.2",
+      "teamId": "2",
+      "name": "Board Men",
+      "roster": [
+        { "playerId": "200", "name": "Nikola Jokic" },
+        { "playerId": "201", "name": "Victor Wembanyama" },
+        { "playerId": "202", "name": "Cade Cunningham" },
+        { "playerId": "203", "name": "Jalen Johnson" },
+        { "playerId": "902", "name": "Toumani Camara (FA pickup)" }
+      ]
+    }
+  ],
+  "draft": {
+    "100": { "name": "Shai Gilgeous-Alexander", "round": 1, "pick": 2 },
+    "101": { "name": "Jalen Williams", "round": 3, "pick": 28 },
+    "102": { "name": "Alperen Sengun", "round": 3, "pick": 31 },
+    "103": { "name": "Derrick White", "round": 5, "pick": 55 },
+    "104": { "name": "Payton Pritchard", "round": 5, "pick": 58 },
+    "200": { "name": "Nikola Jokic", "round": 1, "pick": 1 },
+    "201": { "name": "Victor Wembanyama", "round": 1, "pick": 3 },
+    "202": { "name": "Cade Cunningham", "round": 2, "pick": 15 },
+    "203": { "name": "Jalen Johnson", "round": 6, "pick": 70 }
+  }
+}

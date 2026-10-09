@@ -1,0 +1,45 @@
+name: Deploy keeper tracker to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # lets you trigger a deploy manually from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy at a time; cancel older in-progress runs.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble the site (only the files the page needs)
+        run: |
+          mkdir -p _site
+          cp index.html keeper.js importer.js _site/
+          # Publish league.json if it's committed; otherwise the page falls back to
+          # its paste importer / file picker.
+          if [ -f league.json ]; then cp league.json _site/; fi
+          # Disable Jekyll processing so files are served verbatim.
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

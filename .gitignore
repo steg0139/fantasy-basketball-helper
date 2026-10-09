@@ -1,0 +1,12 @@
+# Never commit Yahoo OAuth credentials
+puller/oauth2.json
+
+# Local Pages build scratch dir
+_site/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS cruft
+.DS_Store

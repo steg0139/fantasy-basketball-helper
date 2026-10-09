@@ -1,0 +1,1229 @@
+{
+  "meta": {
+    "leagueKey": "paste.2025",
+    "leagueName": "Keeper League",
+    "season": 2025,
+    "nextSeason": 2026,
+    "rounds": 15,
+    "faCostStartRound": 8,
+    "generatedAt": "2026-10-09T01:20:22.775Z",
+    "source": "paste-import",
+    "rosterSource": "roster-paste"
+  },
+  "teams": [
+    {
+      "teamKey": "paste.t.1",
+      "teamId": "1",
+      "name": "Wish Upon a Sarr",
+      "roster": [
+        {
+          "playerId": "n:ayo dosunmu",
+          "name": "Ayo Dosunmu"
+        },
+        {
+          "playerId": "n:bub carrington",
+          "name": "Bub Carrington"
+        },
+        {
+          "playerId": "n:ryan rollins",
+          "name": "Ryan Rollins"
+        },
+        {
+          "playerId": "n:og anunoby",
+          "name": "OG Anunoby"
+        },
+        {
+          "playerId": "n:aaron gordon",
+          "name": "Aaron Gordon"
+        },
+        {
+          "playerId": "n:karl-anthony towns",
+          "name": "Karl-Anthony Towns"
+        },
+        {
+          "playerId": "n:alex sarr",
+          "name": "Alex Sarr"
+        },
+        {
+          "playerId": "n:devin booker",
+          "name": "Devin Booker"
+        },
+        {
+          "playerId": "n:donovan mitchell",
+          "name": "Donovan Mitchell"
+        },
+        {
+          "playerId": "n:mitchell robinson",
+          "name": "Mitchell Robinson"
+        },
+        {
+          "playerId": "n:deaaron fox",
+          "name": "De'Aaron Fox"
+        },
+        {
+          "playerId": "n:cody williams",
+          "name": "Cody Williams"
+        },
+        {
+          "playerId": "n:paolo banchero",
+          "name": "Paolo Banchero"
+        },
+        {
+          "playerId": "n:bam adebayo",
+          "name": "Bam Adebayo"
+        },
+        {
+          "playerId": "n:gui santos",
+          "name": "Gui Santos"
+        },
+        {
+          "playerId": "n:franz wagner",
+          "name": "Franz Wagner"
+        },
+        {
+          "playerId": "n:luka doncic",
+          "name": "Luka Dončić"
+        },
+        {
+          "playerId": "n:giannis antetokounmpo",
+          "name": "Giannis Antetokounmpo"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.2",
+      "teamId": "2",
+      "name": "Fantasy Basketball Team *",
+      "roster": [
+        {
+          "playerId": "n:donte divincenzo",
+          "name": "Donte DiVincenzo"
+        },
+        {
+          "playerId": "n:stephon castle",
+          "name": "Stephon Castle"
+        },
+        {
+          "playerId": "n:deni avdija",
+          "name": "Deni Avdija"
+        },
+        {
+          "playerId": "n:jaden mcdaniels",
+          "name": "Jaden McDaniels"
+        },
+        {
+          "playerId": "n:chet holmgren",
+          "name": "Chet Holmgren"
+        },
+        {
+          "playerId": "n:naz reid",
+          "name": "Naz Reid"
+        },
+        {
+          "playerId": "n:ivica zubac",
+          "name": "Ivica Zubac"
+        },
+        {
+          "playerId": "n:jalen duren",
+          "name": "Jalen Duren"
+        },
+        {
+          "playerId": "n:isaiah hartenstein",
+          "name": "Isaiah Hartenstein"
+        },
+        {
+          "playerId": "n:rudy gobert",
+          "name": "Rudy Gobert"
+        },
+        {
+          "playerId": "n:jalen suggs",
+          "name": "Jalen Suggs"
+        },
+        {
+          "playerId": "n:kyshawn george",
+          "name": "Kyshawn George"
+        },
+        {
+          "playerId": "n:jalen smith",
+          "name": "Jalen Smith"
+        },
+        {
+          "playerId": "n:nic claxton",
+          "name": "Nic Claxton"
+        },
+        {
+          "playerId": "n:grayson allen",
+          "name": "Grayson Allen"
+        },
+        {
+          "playerId": "n:kyrie irving",
+          "name": "Kyrie Irving"
+        },
+        {
+          "playerId": "n:damian lillard",
+          "name": "Damian Lillard"
+        },
+        {
+          "playerId": "n:paul george",
+          "name": "Paul George"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.3",
+      "teamId": "3",
+      "name": "Trust the Process",
+      "roster": [
+        {
+          "playerId": "n:shaedon sharpe",
+          "name": "Shaedon Sharpe"
+        },
+        {
+          "playerId": "n:christian braun",
+          "name": "Christian Braun"
+        },
+        {
+          "playerId": "n:rj barrett",
+          "name": "RJ Barrett"
+        },
+        {
+          "playerId": "n:jayson tatum",
+          "name": "Jayson Tatum"
+        },
+        {
+          "playerId": "n:anthony davis",
+          "name": "Anthony Davis"
+        },
+        {
+          "playerId": "n:keegan murray",
+          "name": "Keegan Murray"
+        },
+        {
+          "playerId": "n:nikola vucevic",
+          "name": "Nikola Vučević"
+        },
+        {
+          "playerId": "n:dylan harper",
+          "name": "Dylan Harper"
+        },
+        {
+          "playerId": "n:anthony black",
+          "name": "Anthony Black"
+        },
+        {
+          "playerId": "n:vj edgecombe",
+          "name": "VJ Edgecombe"
+        },
+        {
+          "playerId": "n:jarrett allen",
+          "name": "Jarrett Allen"
+        },
+        {
+          "playerId": "n:jared mccain",
+          "name": "Jared McCain"
+        },
+        {
+          "playerId": "n:andrew nembhard",
+          "name": "Andrew Nembhard"
+        },
+        {
+          "playerId": "n:kon knueppel",
+          "name": "Kon Knueppel"
+        },
+        {
+          "playerId": "n:jalen williams",
+          "name": "Jalen Williams"
+        },
+        {
+          "playerId": "n:jaren jackson jr",
+          "name": "Jaren Jackson Jr."
+        },
+        {
+          "playerId": "n:anfernee simons",
+          "name": "Anfernee Simons"
+        },
+        {
+          "playerId": "n:fred vanvleet",
+          "name": "Fred VanVleet"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.4",
+      "teamId": "4",
+      "name": "Why so serious?",
+      "roster": [
+        {
+          "playerId": "n:shai gilgeous-alexander",
+          "name": "Shai Gilgeous-Alexander"
+        },
+        {
+          "playerId": "n:cameron johnson",
+          "name": "Cameron Johnson"
+        },
+        {
+          "playerId": "n:jalen brunson",
+          "name": "Jalen Brunson"
+        },
+        {
+          "playerId": "n:julius randle",
+          "name": "Julius Randle"
+        },
+        {
+          "playerId": "n:saddiq bey",
+          "name": "Saddiq Bey"
+        },
+        {
+          "playerId": "n:maxime raynaud",
+          "name": "Maxime Raynaud"
+        },
+        {
+          "playerId": "n:donovan clingan",
+          "name": "Donovan Clingan"
+        },
+        {
+          "playerId": "n:jalen green",
+          "name": "Jalen Green"
+        },
+        {
+          "playerId": "n:nikola jokic",
+          "name": "Nikola Jokić"
+        },
+        {
+          "playerId": "n:desmond bane",
+          "name": "Desmond Bane"
+        },
+        {
+          "playerId": "n:n alexander-walker",
+          "name": "N. Alexander-Walker"
+        },
+        {
+          "playerId": "n:miles bridges",
+          "name": "Miles Bridges"
+        },
+        {
+          "playerId": "n:evan mobley",
+          "name": "Evan Mobley"
+        },
+        {
+          "playerId": "n:alperen sengun",
+          "name": "Alperen Şengün"
+        },
+        {
+          "playerId": "n:pascal siakam",
+          "name": "Pascal Siakam"
+        },
+        {
+          "playerId": "n:anthony edwards",
+          "name": "Anthony Edwards"
+        },
+        {
+          "playerId": "n:trae young",
+          "name": "Trae Young"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.5",
+      "teamId": "5",
+      "name": "Kawhi Leonard Planting Trees",
+      "roster": [
+        {
+          "playerId": "n:immanuel quickley",
+          "name": "Immanuel Quickley"
+        },
+        {
+          "playerId": "n:jrue holiday",
+          "name": "Jrue Holiday"
+        },
+        {
+          "playerId": "n:norman powell",
+          "name": "Norman Powell"
+        },
+        {
+          "playerId": "n:justin edwards",
+          "name": "Justin Edwards"
+        },
+        {
+          "playerId": "n:jabari smith jr",
+          "name": "Jabari Smith Jr."
+        },
+        {
+          "playerId": "n:jaylen brown",
+          "name": "Jaylen Brown"
+        },
+        {
+          "playerId": "n:jakob poeltl",
+          "name": "Jakob Poeltl"
+        },
+        {
+          "playerId": "n:derrick white",
+          "name": "Derrick White"
+        },
+        {
+          "playerId": "n:quentin grimes",
+          "name": "Quentin Grimes"
+        },
+        {
+          "playerId": "n:precious achiuwa",
+          "name": "Precious Achiuwa"
+        },
+        {
+          "playerId": "n:cj mccollum",
+          "name": "CJ McCollum"
+        },
+        {
+          "playerId": "n:tyler herro",
+          "name": "Tyler Herro"
+        },
+        {
+          "playerId": "n:kawhi leonard",
+          "name": "Kawhi Leonard"
+        },
+        {
+          "playerId": "n:joel embiid",
+          "name": "Joel Embiid"
+        },
+        {
+          "playerId": "n:michael porter jr",
+          "name": "Michael Porter Jr."
+        },
+        {
+          "playerId": "n:russell westbrook",
+          "name": "Russell Westbrook"
+        },
+        {
+          "playerId": "n:bennedict mathurin",
+          "name": "Bennedict Mathurin"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.6",
+      "teamId": "6",
+      "name": "I'll be back in 2026",
+      "roster": [
+        {
+          "playerId": "n:dejounte murray",
+          "name": "Dejounte Murray"
+        },
+        {
+          "playerId": "n:devin vassell",
+          "name": "Devin Vassell"
+        },
+        {
+          "playerId": "n:ausar thompson",
+          "name": "Ausar Thompson"
+        },
+        {
+          "playerId": "n:toumani camara",
+          "name": "Toumani Camara"
+        },
+        {
+          "playerId": "n:matas buzelis",
+          "name": "Matas Buzelis"
+        },
+        {
+          "playerId": "n:cooper flagg",
+          "name": "Cooper Flagg"
+        },
+        {
+          "playerId": "n:daniel gafford",
+          "name": "Daniel Gafford"
+        },
+        {
+          "playerId": "n:mark williams",
+          "name": "Mark Williams"
+        },
+        {
+          "playerId": "n:payton pritchard",
+          "name": "Payton Pritchard"
+        },
+        {
+          "playerId": "n:moussa diabate",
+          "name": "Moussa Diabaté"
+        },
+        {
+          "playerId": "n:keyonte george",
+          "name": "Keyonte George"
+        },
+        {
+          "playerId": "n:lauri markkanen",
+          "name": "Lauri Markkanen"
+        },
+        {
+          "playerId": "n:onyeka okongwu",
+          "name": "Onyeka Okongwu"
+        },
+        {
+          "playerId": "n:kristaps porzingis",
+          "name": "Kristaps Porziņģis"
+        },
+        {
+          "playerId": "n:darius garland",
+          "name": "Darius Garland"
+        },
+        {
+          "playerId": "n:tyrese haliburton",
+          "name": "Tyrese Haliburton"
+        },
+        {
+          "playerId": "n:zach edey",
+          "name": "Zach Edey"
+        },
+        {
+          "playerId": "n:ja morant",
+          "name": "Ja Morant"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.7",
+      "teamId": "7",
+      "name": "America Stole Basketball",
+      "roster": [
+        {
+          "playerId": "n:dyson daniels",
+          "name": "Dyson Daniels"
+        },
+        {
+          "playerId": "n:austin reaves",
+          "name": "Austin Reaves"
+        },
+        {
+          "playerId": "n:kevin porter jr",
+          "name": "Kevin Porter Jr."
+        },
+        {
+          "playerId": "n:mikal bridges",
+          "name": "Mikal Bridges"
+        },
+        {
+          "playerId": "n:brandon miller",
+          "name": "Brandon Miller"
+        },
+        {
+          "playerId": "n:cason wallace",
+          "name": "Cason Wallace"
+        },
+        {
+          "playerId": "n:scottie barnes",
+          "name": "Scottie Barnes"
+        },
+        {
+          "playerId": "n:josh hart",
+          "name": "Josh Hart"
+        },
+        {
+          "playerId": "n:collin gillespie",
+          "name": "Collin Gillespie"
+        },
+        {
+          "playerId": "n:josh giddey",
+          "name": "Josh Giddey"
+        },
+        {
+          "playerId": "n:brandin podziemski",
+          "name": "Brandin Podziemski"
+        },
+        {
+          "playerId": "n:collin sexton",
+          "name": "Collin Sexton"
+        },
+        {
+          "playerId": "n:collin murray-boyles",
+          "name": "Collin Murray-Boyles"
+        },
+        {
+          "playerId": "n:santi aldama",
+          "name": "Santi Aldama"
+        },
+        {
+          "playerId": "n:domantas sabonis",
+          "name": "Domantas Sabonis"
+        },
+        {
+          "playerId": "n:trey murphy iii",
+          "name": "Trey Murphy III"
+        }
+      ]
+    },
+    {
+      "teamKey": "paste.t.8",
+      "teamId": "8",
+      "name": "Wemby FMVP *",
+      "roster": [
+        {
+          "playerId": "n:jamal murray",
+          "name": "Jamal Murray"
+        },
+        {
+          "playerId": "n:brandon ingram",
+          "name": "Brandon Ingram"
+        },
+        {
+          "playerId": "n:james harden",
+          "name": "James Harden"
+        },
+        {
+          "playerId": "n:demar derozan",
+          "name": "DeMar DeRozan"
+        },
+        {
+          "playerId": "n:jalen johnson",
+          "name": "Jalen Johnson"
+        },
+        {
+          "playerId": "n:amen thompson",
+          "name": "Amen Thompson"
+        },
+        {
+          "playerId": "n:neemias queta",
+          "name": "Neemias Queta"
+        },
+        {
+          "playerId": "n:taylor hendricks",
+          "name": "Taylor Hendricks"
+        },
+        {
+          "playerId": "n:lebron james",
+          "name": "LeBron James"
+        },
+        {
+          "playerId": "n:victor wembanyama",
+          "name": "Victor Wembanyama"
+        },
+        {
+          "playerId": "n:lamelo ball",
+          "name": "LaMelo Ball"
+        },
+        {
+          "playerId": "n:reed sheppard",
+          "name": "Reed Sheppard"
+        },
+        {
+          "playerId": "n:kevin durant",
+          "name": "Kevin Durant"
+        },
+        {
+          "playerId": "n:stephen curry",
+          "name": "Stephen Curry"
+        },
+        {
+          "playerId": "n:andrew wiggins",
+          "name": "Andrew Wiggins"
+        },
+        {
+          "playerId": "n:cade cunningham",
+          "name": "Cade Cunningham"
+        },
+        {
+          "playerId": "n:tyrese maxey",
+          "name": "Tyrese Maxey"
+        }
+      ]
+    }
+  ],
+  "draft": {
+    "n:nikola jokic": {
+      "name": "Nikola Jokić",
+      "round": 1,
+      "pick": 1
+    },
+    "n:victor wembanyama": {
+      "name": "Victor Wembanyama",
+      "round": 1,
+      "pick": 2
+    },
+    "n:shai gilgeous-alexander": {
+      "name": "Shai Gilgeous-Alexander",
+      "round": 1,
+      "pick": 3
+    },
+    "n:luka doncic": {
+      "name": "Luka Dončić",
+      "round": 1,
+      "pick": 4
+    },
+    "n:giannis antetokounmpo": {
+      "name": "Giannis Antetokounmpo",
+      "round": 1,
+      "pick": 5
+    },
+    "n:cade cunningham": {
+      "name": "Cade Cunningham",
+      "round": 1,
+      "pick": 6
+    },
+    "n:anthony edwards": {
+      "name": "Anthony Edwards",
+      "round": 1,
+      "pick": 7
+    },
+    "n:karl-anthony towns": {
+      "name": "Karl-Anthony Towns",
+      "round": 1,
+      "pick": 8
+    },
+    "n:jaylen brown": {
+      "name": "Jaylen Brown",
+      "round": 2,
+      "pick": 1
+    },
+    "n:trae young": {
+      "name": "Trae Young",
+      "round": 2,
+      "pick": 2
+    },
+    "n:anthony davis": {
+      "name": "Anthony Davis",
+      "round": 2,
+      "pick": 3
+    },
+    "n:devin booker": {
+      "name": "Devin Booker",
+      "round": 2,
+      "pick": 4
+    },
+    "n:james harden": {
+      "name": "James Harden",
+      "round": 2,
+      "pick": 5
+    },
+    "n:domantas sabonis": {
+      "name": "Domantas Sabonis",
+      "round": 2,
+      "pick": 6
+    },
+    "n:kevin durant": {
+      "name": "Kevin Durant",
+      "round": 2,
+      "pick": 7
+    },
+    "n:stephen curry": {
+      "name": "Stephen Curry",
+      "round": 2,
+      "pick": 8
+    },
+    "n:evan mobley": {
+      "name": "Evan Mobley",
+      "round": 3,
+      "pick": 1
+    },
+    "n:tyrese maxey": {
+      "name": "Tyrese Maxey",
+      "round": 3,
+      "pick": 2
+    },
+    "n:scottie barnes": {
+      "name": "Scottie Barnes",
+      "round": 3,
+      "pick": 3
+    },
+    "n:pascal siakam": {
+      "name": "Pascal Siakam",
+      "round": 3,
+      "pick": 4
+    },
+    "n:donovan mitchell": {
+      "name": "Donovan Mitchell",
+      "round": 3,
+      "pick": 5
+    },
+    "n:jalen johnson": {
+      "name": "Jalen Johnson",
+      "round": 3,
+      "pick": 6
+    },
+    "n:alperen sengun": {
+      "name": "Alperen Şengün",
+      "round": 3,
+      "pick": 7
+    },
+    "n:jalen williams": {
+      "name": "Jalen Williams",
+      "round": 3,
+      "pick": 8
+    },
+    "n:bam adebayo": {
+      "name": "Bam Adebayo",
+      "round": 4,
+      "pick": 1
+    },
+    "n:chet holmgren": {
+      "name": "Chet Holmgren",
+      "round": 4,
+      "pick": 2
+    },
+    "n:zion williamson": {
+      "name": "Zion Williamson",
+      "round": 4,
+      "pick": 3
+    },
+    "n:paolo banchero": {
+      "name": "Paolo Banchero",
+      "round": 4,
+      "pick": 4
+    },
+    "n:deaaron fox": {
+      "name": "De'Aaron Fox",
+      "round": 4,
+      "pick": 5
+    },
+    "n:dyson daniels": {
+      "name": "Dyson Daniels",
+      "round": 4,
+      "pick": 6
+    },
+    "n:lamelo ball": {
+      "name": "LaMelo Ball",
+      "round": 4,
+      "pick": 7
+    },
+    "n:jalen brunson": {
+      "name": "Jalen Brunson",
+      "round": 4,
+      "pick": 8
+    },
+    "n:jaren jackson jr": {
+      "name": "Jaren Jackson Jr.",
+      "round": 5,
+      "pick": 1
+    },
+    "n:lebron james": {
+      "name": "LeBron James",
+      "round": 5,
+      "pick": 2
+    },
+    "n:trey murphy iii": {
+      "name": "Trey Murphy III",
+      "round": 5,
+      "pick": 3
+    },
+    "n:cooper flagg": {
+      "name": "Cooper Flagg",
+      "round": 5,
+      "pick": 4
+    },
+    "n:jamal murray": {
+      "name": "Jamal Murray",
+      "round": 5,
+      "pick": 5
+    },
+    "n:jimmy butler iii": {
+      "name": "Jimmy Butler III",
+      "round": 5,
+      "pick": 6
+    },
+    "n:jalen duren": {
+      "name": "Jalen Duren",
+      "round": 5,
+      "pick": 7
+    },
+    "n:derrick white": {
+      "name": "Derrick White",
+      "round": 5,
+      "pick": 8
+    },
+    "n:kawhi leonard": {
+      "name": "Kawhi Leonard",
+      "round": 6,
+      "pick": 1
+    },
+    "n:nikola vucevic": {
+      "name": "Nikola Vučević",
+      "round": 6,
+      "pick": 2
+    },
+    "n:joel embiid": {
+      "name": "Joel Embiid",
+      "round": 6,
+      "pick": 3
+    },
+    "n:franz wagner": {
+      "name": "Franz Wagner",
+      "round": 6,
+      "pick": 4
+    },
+    "n:darius garland": {
+      "name": "Darius Garland",
+      "round": 6,
+      "pick": 5
+    },
+    "n:brandon miller": {
+      "name": "Brandon Miller",
+      "round": 6,
+      "pick": 6
+    },
+    "n:brandon ingram": {
+      "name": "Brandon Ingram",
+      "round": 6,
+      "pick": 7
+    },
+    "n:desmond bane": {
+      "name": "Desmond Bane",
+      "round": 6,
+      "pick": 8
+    },
+    "n:miles bridges": {
+      "name": "Miles Bridges",
+      "round": 7,
+      "pick": 1
+    },
+    "n:jarrett allen": {
+      "name": "Jarrett Allen",
+      "round": 7,
+      "pick": 2
+    },
+    "n:josh giddey": {
+      "name": "Josh Giddey",
+      "round": 7,
+      "pick": 3
+    },
+    "n:lauri markkanen": {
+      "name": "Lauri Markkanen",
+      "round": 7,
+      "pick": 4
+    },
+    "n:jordan poole": {
+      "name": "Jordan Poole",
+      "round": 7,
+      "pick": 5
+    },
+    "n:amen thompson": {
+      "name": "Amen Thompson",
+      "round": 7,
+      "pick": 6
+    },
+    "n:deni avdija": {
+      "name": "Deni Avdija",
+      "round": 7,
+      "pick": 7
+    },
+    "n:myles turner": {
+      "name": "Myles Turner",
+      "round": 7,
+      "pick": 8
+    },
+    "n:norman powell": {
+      "name": "Norman Powell",
+      "round": 8,
+      "pick": 1
+    },
+    "n:zach lavine": {
+      "name": "Zach LaVine",
+      "round": 8,
+      "pick": 2
+    },
+    "n:christian braun": {
+      "name": "Christian Braun",
+      "round": 8,
+      "pick": 3
+    },
+    "n:og anunoby": {
+      "name": "OG Anunoby",
+      "round": 8,
+      "pick": 4
+    },
+    "n:kristaps porzingis": {
+      "name": "Kristaps Porziņģis",
+      "round": 8,
+      "pick": 5
+    },
+    "n:josh hart": {
+      "name": "Josh Hart",
+      "round": 8,
+      "pick": 6
+    },
+    "n:ja morant": {
+      "name": "Ja Morant",
+      "round": 8,
+      "pick": 7
+    },
+    "n:coby white": {
+      "name": "Coby White",
+      "round": 8,
+      "pick": 8
+    },
+    "n:mikal bridges": {
+      "name": "Mikal Bridges",
+      "round": 9,
+      "pick": 1
+    },
+    "n:mark williams": {
+      "name": "Mark Williams",
+      "round": 9,
+      "pick": 2
+    },
+    "n:austin reaves": {
+      "name": "Austin Reaves",
+      "round": 9,
+      "pick": 3
+    },
+    "n:matas buzelis": {
+      "name": "Matas Buzelis",
+      "round": 9,
+      "pick": 4
+    },
+    "n:payton pritchard": {
+      "name": "Payton Pritchard",
+      "round": 9,
+      "pick": 5
+    },
+    "n:keegan murray": {
+      "name": "Keegan Murray",
+      "round": 9,
+      "pick": 6
+    },
+    "n:naz reid": {
+      "name": "Naz Reid",
+      "round": 9,
+      "pick": 7
+    },
+    "n:tyler herro": {
+      "name": "Tyler Herro",
+      "round": 9,
+      "pick": 8
+    },
+    "n:jakob poeltl": {
+      "name": "Jakob Poeltl",
+      "round": 10,
+      "pick": 1
+    },
+    "n:isaiah hartenstein": {
+      "name": "Isaiah Hartenstein",
+      "round": 10,
+      "pick": 2
+    },
+    "n:andrew nembhard": {
+      "name": "Andrew Nembhard",
+      "round": 10,
+      "pick": 3
+    },
+    "n:ivica zubac": {
+      "name": "Ivica Zubac",
+      "round": 10,
+      "pick": 4
+    },
+    "n:demar derozan": {
+      "name": "DeMar DeRozan",
+      "round": 10,
+      "pick": 5
+    },
+    "n:donovan clingan": {
+      "name": "Donovan Clingan",
+      "round": 10,
+      "pick": 6
+    },
+    "n:walker kessler": {
+      "name": "Walker Kessler",
+      "round": 10,
+      "pick": 7
+    },
+    "n:deandre ayton": {
+      "name": "Deandre Ayton",
+      "round": 10,
+      "pick": 8
+    },
+    "n:julius randle": {
+      "name": "Julius Randle",
+      "round": 11,
+      "pick": 1
+    },
+    "n:ausar thompson": {
+      "name": "Ausar Thompson",
+      "round": 11,
+      "pick": 2
+    },
+    "n:santi aldama": {
+      "name": "Santi Aldama",
+      "round": 11,
+      "pick": 3
+    },
+    "n:reed sheppard": {
+      "name": "Reed Sheppard",
+      "round": 11,
+      "pick": 4
+    },
+    "n:immanuel quickley": {
+      "name": "Immanuel Quickley",
+      "round": 11,
+      "pick": 5
+    },
+    "n:anfernee simons": {
+      "name": "Anfernee Simons",
+      "round": 11,
+      "pick": 6
+    },
+    "n:rudy gobert": {
+      "name": "Rudy Gobert",
+      "round": 11,
+      "pick": 7
+    },
+    "n:jalen green": {
+      "name": "Jalen Green",
+      "round": 11,
+      "pick": 8
+    },
+    "n:michael porter jr": {
+      "name": "Michael Porter Jr.",
+      "round": 12,
+      "pick": 1
+    },
+    "n:cam thomas": {
+      "name": "Cam Thomas",
+      "round": 12,
+      "pick": 2
+    },
+    "n:shaedon sharpe": {
+      "name": "Shaedon Sharpe",
+      "round": 12,
+      "pick": 3
+    },
+    "n:kelel ware": {
+      "name": "Kel'el Ware",
+      "round": 12,
+      "pick": 4
+    },
+    "n:onyeka okongwu": {
+      "name": "Onyeka Okongwu",
+      "round": 12,
+      "pick": 5
+    },
+    "n:brandin podziemski": {
+      "name": "Brandin Podziemski",
+      "round": 12,
+      "pick": 6
+    },
+    "n:bobby portis jr": {
+      "name": "Bobby Portis Jr.",
+      "round": 12,
+      "pick": 7
+    },
+    "n:bennedict mathurin": {
+      "name": "Bennedict Mathurin",
+      "round": 12,
+      "pick": 8
+    },
+    "n:paul george": {
+      "name": "Paul George",
+      "round": 13,
+      "pick": 1
+    },
+    "n:rj barrett": {
+      "name": "RJ Barrett",
+      "round": 13,
+      "pick": 2
+    },
+    "n:kevin porter jr": {
+      "name": "Kevin Porter Jr.",
+      "round": 13,
+      "pick": 3
+    },
+    "n:devin vassell": {
+      "name": "Devin Vassell",
+      "round": 13,
+      "pick": 4
+    },
+    "n:alex sarr": {
+      "name": "Alex Sarr",
+      "round": 13,
+      "pick": 5
+    },
+    "n:jayson tatum": {
+      "name": "Jayson Tatum",
+      "round": 13,
+      "pick": 6
+    },
+    "n:cj mccollum": {
+      "name": "CJ McCollum",
+      "round": 13,
+      "pick": 7
+    },
+    "n:jrue holiday": {
+      "name": "Jrue Holiday",
+      "round": 13,
+      "pick": 8
+    },
+    "n:klay thompson": {
+      "name": "Klay Thompson",
+      "round": 14,
+      "pick": 1
+    },
+    "n:kyrie irving": {
+      "name": "Kyrie Irving",
+      "round": 14,
+      "pick": 2
+    },
+    "n:fred vanvleet": {
+      "name": "Fred VanVleet",
+      "round": 14,
+      "pick": 3
+    },
+    "n:chris paul": {
+      "name": "Chris Paul",
+      "round": 14,
+      "pick": 4
+    },
+    "n:tyrese haliburton": {
+      "name": "Tyrese Haliburton",
+      "round": 14,
+      "pick": 5
+    },
+    "n:collin sexton": {
+      "name": "Collin Sexton",
+      "round": 14,
+      "pick": 6
+    },
+    "n:jared mccain": {
+      "name": "Jared McCain",
+      "round": 14,
+      "pick": 7
+    },
+    "n:damian lillard": {
+      "name": "Damian Lillard",
+      "round": 14,
+      "pick": 8
+    },
+    "n:cameron johnson": {
+      "name": "Cameron Johnson",
+      "round": 15,
+      "pick": 1
+    },
+    "n:andrew wiggins": {
+      "name": "Andrew Wiggins",
+      "round": 15,
+      "pick": 2
+    },
+    "n:cason wallace": {
+      "name": "Cason Wallace",
+      "round": 15,
+      "pick": 3
+    },
+    "n:zach edey": {
+      "name": "Zach Edey",
+      "round": 15,
+      "pick": 4
+    },
+    "n:zaccharie risacher": {
+      "name": "Zaccharie Risacher",
+      "round": 15,
+      "pick": 5
+    },
+    "n:dylan harper": {
+      "name": "Dylan Harper",
+      "round": 15,
+      "pick": 6
+    },
+    "n:stephon castle": {
+      "name": "Stephon Castle",
+      "round": 15,
+      "pick": 7
+    },
+    "n:sam hauser": {
+      "name": "Sam Hauser",
+      "round": 15,
+      "pick": 8
+    }
+  }
+}

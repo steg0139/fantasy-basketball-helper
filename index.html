@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Keeper Cost Tracker</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2029;
+    --panel2: #232b36;
+    --line: #313b48;
+    --text: #e6ebf1;
+    --muted: #8a97a8;
+    --accent: #4f8cff;
+    --good: #3ecf8e;
+    --warn: #f0b429;
+    --bad: #ff5c5c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.45;
+  }
+  header {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  header h1 { font-size: 18px; margin: 0; font-weight: 600; }
+  header .sub { color: var(--muted); font-size: 13px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 22px 60px; }
+  .row { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+  .col { flex: 1 1 320px; min-width: 300px; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 18px;
+  }
+  .panel h2 { font-size: 14px; margin: 0 0 12px; font-weight: 600; letter-spacing: .02em; }
+  label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; }
+  select, input[type="file"], button {
+    font: inherit;
+    color: var(--text);
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 8px 10px;
+  }
+  select { width: 100%; }
+  button {
+    cursor: pointer;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+  button.ghost { background: transparent; color: var(--muted); border-color: var(--line); font-weight: 500; }
+  button:hover { filter: brightness(1.08); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .banner {
+    border-radius: 8px; padding: 10px 12px; font-size: 13px; margin-bottom: 14px;
+  }
+  .banner.err { background: rgba(255,92,92,.12); border: 1px solid var(--bad); color: #ffd0d0; }
+  .banner.info { background: rgba(79,140,255,.1); border: 1px solid var(--accent); color: #cfe0ff; }
+
+  /* player list */
+  .players { max-height: 460px; overflow: auto; }
+  .player {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 8px; border-radius: 7px; cursor: pointer; user-select: none;
+  }
+  .player:hover { background: var(--panel2); }
+  .player.sel { background: rgba(79,140,255,.14); }
+  .player.disabled { opacity: .45; cursor: not-allowed; }
+  .player input { width: 16px; height: 16px; accent-color: var(--accent); }
+  .player .pname { flex: 1; font-size: 14px; }
+  .tag {
+    font-size: 11px; padding: 1px 7px; border-radius: 999px;
+    background: var(--panel2); color: var(--muted); border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .tag.fa { color: var(--warn); border-color: var(--warn); }
+  .tag.r1 { color: var(--bad); border-color: var(--bad); }
+
+  /* inventory grid */
+  .inv { display: grid; grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 8px; }
+  .inv .cell { background: var(--panel2); border: 1px solid var(--line); border-radius: 7px; padding: 6px; text-align: center; }
+  .inv .cell.changed { border-color: var(--accent); }
+  .inv .cell .rl { font-size: 11px; color: var(--muted); }
+  .inv .cell input {
+    width: 46px; text-align: center; font: inherit; color: var(--text);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 3px;
+    -moz-appearance: textfield;
+  }
+
+  /* results */
+  .summary { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .stat { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+  .stat .big { font-size: 22px; font-weight: 700; }
+  .stat .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  .verdict { font-size: 15px; font-weight: 700; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; }
+  .verdict.ok { background: rgba(62,207,142,.14); color: var(--good); border: 1px solid var(--good); }
+  .verdict.no { background: rgba(255,92,92,.14); color: var(--bad); border: 1px solid var(--bad); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  td .bump { color: var(--warn); font-size: 12px; }
+  .msg { font-size: 13px; margin: 4px 0; }
+  .msg.warn { color: var(--warn); }
+  .msg.err { color: var(--bad); }
+  .pick-list { font-size: 13px; color: var(--text); }
+  code { background: var(--panel2); padding: 1px 5px; border-radius: 4px; }
+
+  /* importer */
+  textarea {
+    width: 100%; min-height: 150px; resize: vertical; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--text); background: var(--bg); border: 1px solid var(--line);
+    border-radius: 7px; padding: 10px;
+  }
+  input[type="text"], input[type="number"].meta {
+    font: inherit; color: var(--text); background: var(--panel2);
+    border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px;
+  }
+  .field { margin-bottom: 12px; }
+  .inline-fields { display: flex; gap: 12px; flex-wrap: wrap; }
+  .inline-fields .field { flex: 1 1 140px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+  .tabs button { background: var(--panel2); color: var(--muted); border: 1px solid var(--line); font-weight: 500; }
+  .tabs button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .preview { max-height: 240px; overflow: auto; border: 1px solid var(--line); border-radius: 7px; margin-top: 10px; }
+  .preview table { font-size: 12px; }
+  .preview td, .preview th { padding: 4px 8px; }
+  .steps { font-size: 12px; color: var(--muted); margin: 2px 0 10px; padding-left: 18px; }
+  .steps li { margin: 2px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Keeper Cost Tracker</h1>
+  <span class="sub" id="leagueSub">no league loaded</span>
+</header>
+
+<div class="wrap">
+  <div id="loadBanner"></div>
+
+  <div class="panel" id="loadPanel" style="display:none">
+    <h2>Load league data</h2>
+    <div class="tabs">
+      <button id="tabFile" class="active">Load a file</button>
+      <button id="tabPaste">Paste from Yahoo</button>
+    </div>
+
+    <div id="paneFile">
+      <p class="hint" style="margin-top:0">
+        Load a <code>league.json</code> (from a previous import or the Yahoo puller).
+      </p>
+      <input type="file" id="fileInput" accept="application/json,.json" />
+    </div>
+
+    <div id="panePaste" style="display:none">
+      <p class="hint" style="margin-top:0">
+        No Yahoo API access needed. Copy your league's data from the Yahoo website and
+        paste it below. The importer is flexible about formatting — paste the whole thing
+        and check the preview.
+      </p>
+
+      <div class="inline-fields">
+        <div class="field">
+          <label>League name</label>
+          <input type="text" id="impName" placeholder="My Hoops League" />
+        </div>
+        <div class="field">
+          <label>Season (year drafted)</label>
+          <input type="number" class="meta" id="impSeason" placeholder="2025" />
+        </div>
+        <div class="field">
+          <label>Rounds</label>
+          <input type="number" class="meta" id="impRounds" value="15" />
+        </div>
+        <div class="field">
+          <label>Cheapest FA cost round</label>
+          <input type="number" class="meta" id="impFa" value="8" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Step 1 — Draft results</label>
+        <ol class="steps">
+          <li>Open your league's <b>Draft Results</b> page on Yahoo.</li>
+          <li>Select the whole draft board and copy it, then paste below. Pick number,
+              player, team/position, and manager lines are all handled.</li>
+        </ol>
+        <textarea id="impDraft" placeholder="1.	Nikola Jokić&#10;(DEN - C)&#10;Why so serious?&#10;2.	Victor Wembanyama&#10;(SAS - C)&#10;Wemby FMVP *&#10;...&#10;Round 2&#10;1.	Jaylen Brown&#10;(PHI - SG,SF,PF)&#10;Kawhi Leonard Planting Trees&#10;..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Step 2 — End-of-season rosters (one team at a time)</label>
+        <ol class="steps">
+          <li>Open a team's roster on Yahoo, copy the player list (stats and all), paste it below.</li>
+          <li>Type that team's name, click <b>Add team</b>, then repeat for each team.</li>
+          <li>Players not found in the draft are treated as free-agent keepers.</li>
+        </ol>
+        <div class="inline-fields" style="align-items:flex-end">
+          <div class="field" style="flex:1 1 200px">
+            <label>Team name</label>
+            <input type="text" id="rosterTeamName" placeholder="e.g. Why so serious?" />
+          </div>
+          <div class="field" style="flex:0 0 auto">
+            <button id="rosterAdd">Add team</button>
+          </div>
+        </div>
+        <textarea id="rosterPaste" placeholder="Nikola JokićPlayer Note&#10;DEN - C&#10;65&#10;1&#10;...&#10;Shai Gilgeous-AlexanderNew Player Note&#10;OKC - PG&#10;..."></textarea>
+        <div id="rosterList" style="margin-top:10px"></div>
+      </div>
+
+      <div id="impBanner"></div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+        <button id="impPreview">Preview</button>
+        <button id="impUse" class="ghost">Use this data</button>
+        <button id="impDownload" class="ghost">Download league.json</button>
+      </div>
+
+      <div id="impPreviewBox"></div>
+    </div>
+  </div>
+
+  <div class="row" id="app" style="display:none">
+    <div class="col">
+      <div class="panel">
+        <h2>Team</h2>
+        <select id="teamSelect"></select>
+        <div class="hint">Pick inventory and keeper choices are saved per team in this browser.</div>
+        <div id="adminControls" style="margin-top:12px;display:none;gap:10px;align-items:center;flex-wrap:wrap">
+          <button id="editData" class="ghost" style="padding:5px 10px;font-size:12px">Edit league data</button>
+          <button id="exportLeague" class="ghost" style="padding:5px 10px;font-size:12px">Export league.json</button>
+          <span class="hint" style="margin:0">Admin tools. Export, commit the file, and push to update everyone.</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Keepers <span class="sub" id="keeperCount"></span></h2>
+        <div class="hint" style="margin-top:0;margin-bottom:8px">
+          Choose 3–7 players from this team's end-of-season roster.
+        </div>
+        <div class="players" id="playerList"></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="panel">
+        <h2>Draft pick inventory (next season)</h2>
+        <div class="hint" style="margin-top:0;margin-bottom:10px">
+          Defaults to one pick per round. Adjust for trades: set a round to 0 if you traded
+          the pick away, or 2+ if you acquired extra. <button class="ghost" id="resetInv" style="padding:3px 8px;font-size:12px">Reset to default</button>
+        </div>
+        <div class="inv" id="invGrid"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Result</h2>
+        <div id="result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="keeper.js"></script>
+<script src="importer.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  const LS_PREFIX = "keeperTracker:";
+  let league = null;        // loaded league.json
+  let currentTeamKey = null;
+
+  const el = (id) => document.getElementById(id);
+
+  // Admin mode: add ?admin to the URL to reveal the data-import tools. For everyone
+  // else the page is just the keeper calculator with the league's data preloaded.
+  const IS_ADMIN = /[?&]admin\b/.test(location.search);
+
+  // ---- persistence (per team) ----
+  function stateKey(teamKey) {
+    const lk = league && league.meta ? league.meta.leagueKey : "unknown";
+    return LS_PREFIX + lk + ":" + teamKey;
+  }
+  function loadState(teamKey) {
+    try {
+      const raw = localStorage.getItem(stateKey(teamKey));
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+  function saveState(teamKey, state) {
+    try { localStorage.setItem(stateKey(teamKey), JSON.stringify(state)); } catch (e) {}
+  }
+
+  // ---- data loading ----
+  function applyLeague(data) {
+    league = data;
+    el("loadPanel").style.display = "none";
+    el("loadBanner").innerHTML = "";
+    el("app").style.display = "flex";
+    const m = data.meta || {};
+    el("leagueSub").textContent =
+      (m.leagueName || "League") +
+      (m.season ? " · " + m.season + " season" : "") +
+      (m.nextSeason ? " · keepers for " + m.nextSeason : "") +
+      " · " + (m.rounds || 15) + " rounds";
+    // Admin-only controls (edit data / export) become available once loaded.
+    const adminBox = el("adminControls");
+    if (adminBox) adminBox.style.display = IS_ADMIN ? "flex" : "none";
+    buildTeamSelect();
+  }
+
+  function tryAutoLoad() {
+    fetch("league.json", { cache: "no-store" })
+      .then((r) => { if (!r.ok) throw new Error("no file"); return r.json(); })
+      .then((data) => { persistLeague(data); applyLeague(data); })
+      .catch(() => {
+        const saved = loadPersistedLeague();
+        if (saved) {
+          applyLeague(saved);
+        } else if (IS_ADMIN) {
+          // Admin with no data yet: show the import tools.
+          el("loadPanel").style.display = "block";
+        } else {
+          // Regular visitor and no data available: friendly notice, no import UI.
+          el("loadBanner").innerHTML =
+            '<div class="banner info">League data isn\'t available yet. Check back once ' +
+            "the commissioner has loaded this season's draft and rosters.</div>";
+        }
+      });
+  }
+
+  el("fileInput").addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      try {
+        const data = JSON.parse(reader.result);
+        persistLeague(data);
+        applyLeague(data);
+      } catch (err) {
+        el("loadBanner").innerHTML =
+          '<div class="banner err">That file isn\'t valid league.json: ' +
+          String(err.message || err) + "</div>";
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  // ---- import panel (paste from Yahoo) ----
+  const LAST_LEAGUE_KEY = LS_PREFIX + "lastLeague";
+
+  function persistLeague(data) {
+    try { localStorage.setItem(LAST_LEAGUE_KEY, JSON.stringify(data)); } catch (e) {}
+  }
+  function loadPersistedLeague() {
+    try {
+      const raw = localStorage.getItem(LAST_LEAGUE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function switchTab(which) {
+    const file = which === "file";
+    el("tabFile").classList.toggle("active", file);
+    el("tabPaste").classList.toggle("active", !file);
+    el("paneFile").style.display = file ? "block" : "none";
+    el("panePaste").style.display = file ? "none" : "block";
+  }
+  el("tabFile").addEventListener("click", () => switchTab("file"));
+  el("tabPaste").addEventListener("click", () => switchTab("paste"));
+
+  // Accumulator of teams added one at a time: [{ name, players: [name,...] }].
+  let addedRosterTeams = [];
+
+  // ---- in-progress import autosave (so a refresh mid-entry doesn't lose work) ----
+  const IMPORT_DRAFT_KEY = LS_PREFIX + "importDraft";
+
+  function saveImportProgress() {
+    try {
+      localStorage.setItem(IMPORT_DRAFT_KEY, JSON.stringify({
+        leagueName: el("impName").value,
+        season: el("impSeason").value,
+        rounds: el("impRounds").value,
+        fa: el("impFa").value,
+        draftText: el("impDraft").value,
+        teams: addedRosterTeams,
+      }));
+    } catch (e) {}
+  }
+  function clearImportProgress() {
+    try { localStorage.removeItem(IMPORT_DRAFT_KEY); } catch (e) {}
+  }
+  function restoreImportProgress() {
+    let saved = null;
+    try {
+      const raw = localStorage.getItem(IMPORT_DRAFT_KEY);
+      saved = raw ? JSON.parse(raw) : null;
+    } catch (e) { saved = null; }
+    if (!saved) return false;
+    if (saved.leagueName != null) el("impName").value = saved.leagueName;
+    if (saved.season != null) el("impSeason").value = saved.season;
+    if (saved.rounds != null && saved.rounds !== "") el("impRounds").value = saved.rounds;
+    if (saved.fa != null && saved.fa !== "") el("impFa").value = saved.fa;
+    if (saved.draftText != null) el("impDraft").value = saved.draftText;
+    addedRosterTeams = Array.isArray(saved.teams) ? saved.teams : [];
+    return true;
+  }
+
+  // Autosave as the user types/edits the import form.
+  ["impName", "impSeason", "impRounds", "impFa", "impDraft"].forEach((id) => {
+    el(id).addEventListener("input", saveImportProgress);
+  });
+
+  function readImportInputs() {
+    return {
+      leagueName: el("impName").value.trim() || "My League",
+      season: parseInt(el("impSeason").value, 10) || null,
+      rounds: parseInt(el("impRounds").value, 10) || 15,
+      faCostStartRound: parseInt(el("impFa").value, 10) || 8,
+      draftText: el("impDraft").value,
+    };
+  }
+
+  function renderRosterList() {
+    const box = el("rosterList");
+    if (!addedRosterTeams.length) {
+      box.innerHTML = '<div class="hint">No teams added yet. Rosters you add appear here.</div>';
+      return;
+    }
+    let html = '<table><thead><tr><th>Team</th><th>Players</th><th></th></tr></thead><tbody>';
+    addedRosterTeams.forEach((t, i) => {
+      html += "<tr><td>" + escapeHtml(t.name) + "</td><td>" + t.players.length +
+        '</td><td><button class="ghost" data-rm="' + i + '" style="padding:2px 8px;font-size:12px">remove</button></td></tr>';
+    });
+    html += "</tbody></table>";
+    box.innerHTML = html;
+    box.querySelectorAll("button[data-rm]").forEach((b) => {
+      b.addEventListener("click", function () {
+        addedRosterTeams.splice(parseInt(b.getAttribute("data-rm"), 10), 1);
+        saveImportProgress();
+        renderRosterList();
+      });
+    });
+  }
+
+  el("rosterAdd").addEventListener("click", function () {
+    const name = el("rosterTeamName").value.trim();
+    const players = Importer.parseOneRoster(el("rosterPaste").value);
+    if (!name) {
+      el("impBanner").innerHTML = '<div class="banner err">Enter a team name before adding.</div>';
+      return;
+    }
+    if (!players.length) {
+      el("impBanner").innerHTML = '<div class="banner err">No players found in that roster paste.</div>';
+      return;
+    }
+    // Replace if the same team name was already added, else append.
+    const existing = addedRosterTeams.findIndex((t) => t.name === name);
+    if (existing >= 0) addedRosterTeams[existing] = { name, players };
+    else addedRosterTeams.push({ name, players });
+    el("impBanner").innerHTML =
+      '<div class="banner info">Added ' + escapeHtml(name) + " (" + players.length + " players).</div>";
+    el("rosterTeamName").value = "";
+    el("rosterPaste").value = "";
+    saveImportProgress();
+    renderRosterList();
+  });
+
+  function buildFromInputs() {
+    const inp = readImportInputs();
+    const draftParsed = Importer.parseDraft(inp.draftText);
+    const built = Importer.buildLeagueJson({
+      leagueName: inp.leagueName,
+      season: inp.season,
+      rounds: inp.rounds,
+      faCostStartRound: inp.faCostStartRound,
+      draftRows: draftParsed.results,
+      rosterTeams: addedRosterTeams,
+    });
+    return {
+      league: built.league,
+      warnings: [].concat(draftParsed.warnings, built.warnings),
+      draftCount: draftParsed.results.length,
+      teamCount: built.league.teams.length,
+    };
+  }
+
+  function renderImportPreview() {
+    const out = buildFromInputs();
+    const box = el("impPreviewBox");
+    let html = "";
+
+    html += '<div class="banner info" style="margin-top:14px">Parsed ' +
+      out.draftCount + " draft picks and " + out.teamCount + " teams.</div>";
+
+    out.warnings.forEach((w) => {
+      html += '<div class="msg warn">• ' + escapeHtml(w) + "</div>";
+    });
+
+    // Draft preview table.
+    const draft = out.league.draft;
+    const draftRows = Object.keys(draft).map((id) => draft[id])
+      .sort((a, b) => (a.round - b.round) || ((a.pick || 0) - (b.pick || 0)));
+    html += "<h2 style='margin:14px 0 6px;font-size:13px'>Draft</h2>";
+    html += '<div class="preview"><table><thead><tr><th>Round</th><th>Pick</th><th>Player</th><th>Keeper cost</th></tr></thead><tbody>';
+    draftRows.forEach((d) => {
+      const cost = d.round <= 1 ? "can't keep (R1)" : "R" + (d.round - 1);
+      html += "<tr><td>" + d.round + "</td><td>" + (d.pick != null ? d.pick : "") +
+        "</td><td>" + escapeHtml(d.name) + "</td><td>" + cost + "</td></tr>";
+    });
+    html += "</tbody></table></div>";
+
+    // Roster preview.
+    html += "<h2 style='margin:14px 0 6px;font-size:13px'>Teams &amp; rosters</h2>";
+    html += '<div class="preview"><table><thead><tr><th>Team</th><th>Player</th><th>Origin</th></tr></thead><tbody>';
+    out.league.teams.forEach((t) => {
+      t.roster.forEach((p, i) => {
+        const d = draft[p.playerId];
+        const origin = d ? ("drafted R" + d.round) : "free agent";
+        html += "<tr><td>" + (i === 0 ? escapeHtml(t.name) : "") + "</td><td>" +
+          escapeHtml(p.name) + "</td><td>" + origin + "</td></tr>";
+      });
+    });
+    html += "</tbody></table></div>";
+
+    box.innerHTML = html;
+    return out;
+  }
+
+  el("impPreview").addEventListener("click", function () {
+    try {
+      renderImportPreview();
+      el("impBanner").innerHTML = "";
+    } catch (err) {
+      el("impBanner").innerHTML =
+        '<div class="banner err">Import error: ' + escapeHtml(String(err.message || err)) + "</div>";
+    }
+  });
+
+  function downloadJson(obj, filename) {
+    const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename || "league.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  el("impUse").addEventListener("click", function () {
+    try {
+      const out = buildFromInputs();
+      if (!out.teamCount) {
+        el("impBanner").innerHTML =
+          '<div class="banner err">No teams parsed. Paste at least one team roster.</div>';
+        return;
+      }
+      persistLeague(out.league);
+      clearImportProgress(); // committed; drop the in-progress draft
+      applyLeague(out.league);
+    } catch (err) {
+      el("impBanner").innerHTML =
+        '<div class="banner err">Import error: ' + escapeHtml(String(err.message || err)) + "</div>";
+    }
+  });
+
+  el("impDownload").addEventListener("click", function () {
+    try {
+      const out = buildFromInputs();
+      // Downloading implies committing too, so the loaded app matches the file.
+      persistLeague(out.league);
+      clearImportProgress();
+      applyLeague(out.league);
+      downloadJson(out.league, "league.json");
+    } catch (err) {
+      el("impBanner").innerHTML =
+        '<div class="banner err">Download error: ' + escapeHtml(String(err.message || err)) + "</div>";
+    }
+  });
+
+  // Re-export the currently loaded league anytime (admin button in the app).
+  const exportBtn = el("exportLeague");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", function () {
+      if (league) downloadJson(league, "league.json");
+    });
+  }
+
+  // Admin: reopen the import tools to update the data.
+  const editBtn = el("editData");
+  if (editBtn) {
+    editBtn.addEventListener("click", function () {
+      el("loadPanel").style.display = "block";
+      switchTab("paste");
+      el("loadPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  // ---- team select ----
+  function buildTeamSelect() {
+    const sel = el("teamSelect");
+    sel.innerHTML = "";
+    (league.teams || []).forEach((t) => {
+      const o = document.createElement("option");
+      o.value = t.teamKey;
+      o.textContent = t.name || t.teamKey;
+      sel.appendChild(o);
+    });
+    sel.onchange = () => selectTeam(sel.value);
+    if (league.teams && league.teams.length) selectTeam(league.teams[0].teamKey);
+  }
+
+  function currentTeam() {
+    return (league.teams || []).find((t) => t.teamKey === currentTeamKey);
+  }
+
+  function rounds() { return (league.meta && league.meta.rounds) || 15; }
+  function faStart() { return (league.meta && league.meta.faCostStartRound) || 8; }
+
+  function selectTeam(teamKey) {
+    currentTeamKey = teamKey;
+    el("teamSelect").value = teamKey;
+    const st = loadState(teamKey) || {};
+    if (!st.inventory) st.inventory = Keeper.defaultInventory(rounds());
+    if (!st.selected) st.selected = [];
+    saveState(teamKey, st);
+    renderInventory();
+    renderPlayers();
+    recompute();
+  }
+
+  // ---- inventory editor ----
+  function renderInventory() {
+    const st = loadState(currentTeamKey);
+    const grid = el("invGrid");
+    grid.innerHTML = "";
+    const def = Keeper.defaultInventory(rounds());
+    for (let r = 1; r <= rounds(); r++) {
+      const cell = document.createElement("div");
+      const val = st.inventory[r] != null ? st.inventory[r] : 0;
+      cell.className = "cell" + (val !== def[r] ? " changed" : "");
+      cell.innerHTML =
+        '<div class="rl">Round ' + r + "</div>";
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = "0";
+      input.step = "1";
+      input.value = val;
+      input.addEventListener("input", function () {
+        const s = loadState(currentTeamKey);
+        let n = parseInt(input.value, 10);
+        if (isNaN(n) || n < 0) n = 0;
+        s.inventory[r] = n;
+        saveState(currentTeamKey, s);
+        cell.className = "cell" + (n !== def[r] ? " changed" : "");
+        recompute();
+      });
+      cell.appendChild(input);
+      grid.appendChild(cell);
+    }
+  }
+
+  el("resetInv").addEventListener("click", function () {
+    const s = loadState(currentTeamKey);
+    s.inventory = Keeper.defaultInventory(rounds());
+    saveState(currentTeamKey, s);
+    renderInventory();
+    recompute();
+  });
+
+  // ---- player classification for display ----
+  function playerMeta(p) {
+    const d = (league.draft || {})[p.playerId];
+    if (d && d.round != null) {
+      if (d.round <= 1) return { type: "r1", label: "R1 · can't keep", keepable: false };
+      return { type: "drafted", label: "drafted R" + d.round + " · costs R" + (d.round - 1), keepable: true };
+    }
+    return { type: "fa", label: "free agent", keepable: true };
+  }
+
+  // ---- player list ----
+  function renderPlayers() {
+    const st = loadState(currentTeamKey);
+    const team = currentTeam();
+    const list = el("playerList");
+    list.innerHTML = "";
+    const roster = (team && team.roster) || [];
+    if (!roster.length) {
+      list.innerHTML = '<div class="hint">No roster data for this team in league.json.</div>';
+      return;
+    }
+    // Sort: keepable drafted by round, then FAs, then non-keepable.
+    roster
+      .slice()
+      .sort((a, b) => {
+        const ma = playerMeta(a), mb = playerMeta(b);
+        const rank = (m, p) => {
+          const d = (league.draft || {})[p.playerId];
+          if (m.type === "r1") return 1000;
+          if (m.type === "fa") return 900;
+          return d ? d.round : 950;
+        };
+        return rank(ma, a) - rank(mb, b);
+      })
+      .forEach((p) => {
+        const meta = playerMeta(p);
+        const sel = st.selected.includes(p.playerId);
+        const row = document.createElement("label");
+        row.className = "player" + (sel ? " sel" : "") + (meta.keepable ? "" : " disabled");
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = sel;
+        cb.disabled = !meta.keepable;
+        cb.addEventListener("change", function () {
+          const s = loadState(currentTeamKey);
+          if (cb.checked) {
+            if (!s.selected.includes(p.playerId)) s.selected.push(p.playerId);
+          } else {
+            s.selected = s.selected.filter((id) => id !== p.playerId);
+          }
+          saveState(currentTeamKey, s);
+          renderPlayers();
+          recompute();
+        });
+        const name = document.createElement("span");
+        name.className = "pname";
+        name.textContent = p.name || p.playerId;
+        const tag = document.createElement("span");
+        tag.className = "tag " + (meta.type === "fa" ? "fa" : meta.type === "r1" ? "r1" : "");
+        tag.textContent = meta.label;
+        row.appendChild(cb);
+        row.appendChild(name);
+        row.appendChild(tag);
+        list.appendChild(row);
+      });
+  }
+
+  // ---- compute + render result ----
+  function recompute() {
+    const st = loadState(currentTeamKey);
+    const team = currentTeam();
+    const roster = (team && team.roster) || [];
+    const chosen = roster.filter((p) => st.selected.includes(p.playerId));
+
+    el("keeperCount").textContent = "(" + chosen.length + " selected)";
+
+    const out = el("result");
+    if (chosen.length === 0) {
+      out.innerHTML = '<div class="hint">Select players above to see what they\'d cost.</div>';
+      return;
+    }
+
+    const res = Keeper.computeKeeperCost({
+      players: chosen.map((p) => ({ playerId: p.playerId, name: p.name })),
+      draft: league.draft || {},
+      inventory: st.inventory,
+      rounds: rounds(),
+      faCostStartRound: faStart(),
+    });
+
+    let html = "";
+
+    html += '<div class="verdict ' + (res.valid ? "ok" : "no") + '">' +
+      (res.valid ? "✓ You can keep these " + chosen.length + " players"
+                 : "✕ This keeper set doesn't work") + "</div>";
+
+    if (res.valid) {
+      html += '<div class="summary">';
+      html += '<div class="stat"><div class="big">' + res.totalPicksUsed + '</div><div class="lbl">picks used</div></div>';
+      html += '<div class="stat"><div class="big">' +
+        res.consumedRounds.map((r) => "R" + r).join(", ") +
+        '</div><div class="lbl">rounds spent</div></div>';
+      html += "</div>";
+    }
+
+    res.errors.forEach((e) => { html += '<div class="msg err">• ' + escapeHtml(e) + "</div>"; });
+    res.warnings.forEach((w) => { html += '<div class="msg warn">• ' + escapeHtml(w) + "</div>"; });
+
+    // Per-keeper table.
+    html += '<table><thead><tr><th>Player</th><th>Origin</th><th>Base cost</th><th>Actual cost</th></tr></thead><tbody>';
+    res.keepers.forEach((k) => {
+      const origin = k.type === "fa" ? "Free agent"
+                   : (k.draftRound ? "Drafted R" + k.draftRound : "—");
+      const base = k.baseRound ? "R" + k.baseRound : (k.keepable ? "—" : "n/a");
+      let actual;
+      if (!k.keepable) actual = '<span class="msg err">can\'t keep</span>';
+      else if (k.costRound == null) actual = "—";
+      else actual = "R" + k.costRound + (k.bumped ? ' <span class="bump">(bumped from R' + k.baseRound + ")</span>" : "");
+      html += "<tr><td>" + escapeHtml(k.name || k.playerId) + "</td><td>" +
+        origin + "</td><td>" + base + "</td><td>" + actual + "</td></tr>";
+    });
+    html += "</tbody></table>";
+
+    out.innerHTML = html;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  restoreImportProgress();
+  renderRosterList();
+  tryAutoLoad();
+})();
+</script>
+</body>
+</html>

@@ -689,6 +689,7 @@
         s.inventory[r] = n;
         saveState(currentTeamKey, s);
         cell.className = "cell" + (n !== def[r] ? " changed" : "");
+        renderPlayers(); // picks changed -> refresh un-keepable highlighting
         recompute();
       });
       cell.appendChild(input);
@@ -701,17 +702,46 @@
     s.inventory = teamDefaultInventory(currentTeamKey);
     saveState(currentTeamKey, s);
     renderInventory();
+    renderPlayers();
     recompute();
   });
 
   // ---- player classification for display ----
-  function playerMeta(p) {
+  // `inv` (optional) is the team's current pick inventory; when provided, players
+  // with no owned pick at or below their base cost round are flagged un-keepable.
+  function playerMeta(p, inv) {
     const d = (league.draft || {})[p.playerId];
+    let base, type, label;
     if (d && d.round != null) {
-      if (d.round <= 1) return { type: "r1", label: "R1 · can't keep", keepable: false };
-      return { type: "drafted", label: "drafted R" + d.round + " · costs R" + (d.round - 1), keepable: true };
+      if (d.round <= 1) {
+        return { type: "r1", label: "R1 · can't keep", keepable: false };
+      }
+      base = d.round - 1;
+      type = "drafted";
+      label = "drafted R" + d.round + " · costs R" + base;
+    } else {
+      base = faStart();
+      type = "fa";
+      label = "free agent · costs R" + base;
     }
-    return { type: "fa", label: "free agent", keepable: true };
+
+    // If we know the inventory, check there's at least one pick at or below `base`.
+    if (inv && !hasPickAtOrBelow(inv, base)) {
+      return {
+        type: "nocap",
+        label: "no R" + base + "-or-earlier pick · can't keep",
+        keepable: false,
+      };
+    }
+    return { type, label, keepable: true, base };
+  }
+
+  // True if the inventory has any pick in rounds 1..maxRound (inclusive).
+  function hasPickAtOrBelow(inv, maxRound) {
+    for (let r = 1; r <= maxRound; r++) {
+      if ((inv[r] || 0) > 0) return true;
+    }
+    return false;
   }
 
   // ---- player list ----
@@ -725,21 +755,22 @@
       list.innerHTML = '<div class="hint">No roster data for this team in league.json.</div>';
       return;
     }
-    // Sort: keepable drafted by round, then FAs, then non-keepable.
+    const inv = st.inventory;
+    // Sort: keepable drafted by round, then FAs, then un-keepable (r1 / no-capital).
     roster
       .slice()
       .sort((a, b) => {
-        const ma = playerMeta(a), mb = playerMeta(b);
+        const ma = playerMeta(a, inv), mb = playerMeta(b, inv);
         const rank = (m, p) => {
           const d = (league.draft || {})[p.playerId];
-          if (m.type === "r1") return 1000;
+          if (!m.keepable) return 1000; // r1 or nocap sink to the bottom
           if (m.type === "fa") return 900;
           return d ? d.round : 950;
         };
         return rank(ma, a) - rank(mb, b);
       })
       .forEach((p) => {
-        const meta = playerMeta(p);
+        const meta = playerMeta(p, inv);
         const sel = st.selected.includes(p.playerId);
         const row = document.createElement("label");
         row.className = "player" + (sel ? " sel" : "") + (meta.keepable ? "" : " disabled");
@@ -762,7 +793,8 @@
         name.className = "pname";
         name.textContent = p.name || p.playerId;
         const tag = document.createElement("span");
-        tag.className = "tag " + (meta.type === "fa" ? "fa" : meta.type === "r1" ? "r1" : "");
+        const tagClass = meta.type === "fa" ? "fa" : (!meta.keepable ? "r1" : "");
+        tag.className = "tag " + tagClass;
         tag.textContent = meta.label;
         row.appendChild(cb);
         row.appendChild(name);
